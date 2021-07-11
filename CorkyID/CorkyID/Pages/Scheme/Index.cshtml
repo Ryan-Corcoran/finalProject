@@ -1,0 +1,75 @@
+﻿@page
+@model CorkyID.IndexModel
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>View Schemes</h1>
+
+<p>
+    <a asp-page="./SchemeCreate">Create New Scheme</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Schemes[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schemes[0].ValidFromDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schemes[0].ValidToDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schemes[0].SchemeDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Schemes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidFromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidToDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchemeDescription)
+            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (item.OwnerID == Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                {
+                    <td>
+                        <a asp-page="./SchemeEdit" asp-route-id="@item.SchemeID">Manage</a> |
+                        <a asp-page="./SchemeDelete" asp-route-id="@item.SchemeID">De-activate</a>
+                    </td>
+                }
+                else
+                @if (await Model.IsUserEnrolled(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.SchemeID))
+                {
+                    <td>
+                        <a asp-page-handler="UnassignUser" asp-route-id="@item.SchemeID">Un-enroll</a>
+                    </td>
+                }
+                else
+                @if (!await Model.IsUserEnrolled(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.SchemeID))
+                {
+                    <td>
+                        <a asp-page-handler="AssignUser" asp-route-id="@item.SchemeID">Enroll</a>
+                    </td>
+                }
+            }
+        </tr>
+}
+    </tbody>
+</table>
