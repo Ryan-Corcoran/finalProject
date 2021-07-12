@@ -1,15 +1,15 @@
 ﻿@page
 @model CorkyID.DetailsModel
+@using System.Security.Claims
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Scheme Details</h1>
 
 <div>
-    <h4>Schemes</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -37,8 +37,48 @@
             @Html.DisplayFor(model => model.Schemes.SchemeDescription)
         </dd>
     </dl>
+    <a class="btn btn-primary mb-2" asp-page="./SchemeEdit" asp-route-id="@Model.Schemes.SchemeID">Edit Scheme Details</a>
+    <hr />
+
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 350px">User ID</th>
+                    <th scope="col">User Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SchemeUsers)
+                {
+                    <tr>
+                        <td scope="col" style="width: 350px">
+                            @Html.DisplayFor(modelItem => item.UserID)
+                        </td>
+                        <td scope="col">
+                            @Model.GetUserEmail(item.UserID)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary mb-2">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <hr />
+
+    <div class="container">
+        <label for="tx_EmailEntry">Enter Email Address of new user</label>
+        <div class="form-group mb-2">
+            <input class="col-sm-2 col-form-label" id="tx_EmailEntry" type="text" placeholder="Enter Email Address" />
+            <button class="btn btn-primary mb-2">Add</button>
+        </div>
+
+    </div>
+    <hr />
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Schemes.SchemeID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Go Back</a>
 </div>

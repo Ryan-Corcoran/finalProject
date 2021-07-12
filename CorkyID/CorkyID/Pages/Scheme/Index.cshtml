@@ -50,22 +50,22 @@
                 @if (item.OwnerID == Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier)))
                 {
                     <td>
-                        <a asp-page="./SchemeEdit" asp-route-id="@item.SchemeID">Manage</a> |
-                        <a asp-page="./SchemeDelete" asp-route-id="@item.SchemeID">De-activate</a>
+                        <a class="btn btn-primary mb-2" asp-page="./SchemeDetails" asp-route-id="@item.SchemeID">Manage</a>
+                        <a class="btn btn-primary mb-2" asp-page="./SchemeDelete" asp-route-id="@item.SchemeID">De-activate</a>
                     </td>
                 }
                 else
                 @if (await Model.IsUserEnrolled(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.SchemeID))
                 {
                     <td>
-                        <a asp-page-handler="UnassignUser" asp-route-id="@item.SchemeID">Un-enroll</a>
+                        <a class="btn btn-primary mb-2" asp-page-handler="UnassignUser" asp-route-id="@item.SchemeID">Un-enroll</a>
                     </td>
                 }
                 else
                 @if (!await Model.IsUserEnrolled(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.SchemeID))
                 {
                     <td>
-                        <a asp-page-handler="AssignUser" asp-route-id="@item.SchemeID">Enroll</a>
+                        <a class="btn btn-primary mb-2" asp-page-handler="AssignUser" asp-route-id="@item.SchemeID">Enroll</a>
                     </td>
                 }
             }

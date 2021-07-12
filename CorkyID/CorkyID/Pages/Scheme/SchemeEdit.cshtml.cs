@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using CorkyID.Data;
 using CorkyID.Models;
 
@@ -23,6 +25,9 @@ namespace CorkyID
         [BindProperty]
         public Schemes Schemes { get; set; }
 
+        [BindProperty]
+        public IList<SchemeUsers> SchemeUsers { get; set; }
+
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
@@ -36,11 +41,14 @@ namespace CorkyID
             {
                 return NotFound();
             }
+
+            SchemeUsers = await _context.SchemeUsers.Where(x => x.SchemeID == id).ToListAsync();
+
+
+
             return Page();
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,6 +56,7 @@ namespace CorkyID
                 return Page();
             }
 
+            Schemes.OwnerID = Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
             _context.Attach(Schemes).State = EntityState.Modified;
 
             try

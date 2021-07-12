@@ -8843,11 +8843,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Ryan Corcoran\\Documents\\VS Projects\\CorkyID\\CorkyID\\CorkyID.csproj",
+      "projectUniqueName": "D:\\Ryan Corcoran\\Documents\\VS Projects\\finalProject\\CorkyID\\CorkyID\\CorkyID.csproj",
       "projectName": "CorkyID",
-      "projectPath": "D:\\Ryan Corcoran\\Documents\\VS Projects\\CorkyID\\CorkyID\\CorkyID.csproj",
+      "projectPath": "D:\\Ryan Corcoran\\Documents\\VS Projects\\finalProject\\CorkyID\\CorkyID\\CorkyID.csproj",
       "packagesPath": "C:\\Users\\Ryan Corcoran\\.nuget\\packages\\",
-      "outputPath": "D:\\Ryan Corcoran\\Documents\\VS Projects\\CorkyID\\CorkyID\\obj\\",
+      "outputPath": "D:\\Ryan Corcoran\\Documents\\VS Projects\\finalProject\\CorkyID\\CorkyID\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ryan Corcoran\\AppData\\Roaming\\NuGet\\NuGet.Config",
