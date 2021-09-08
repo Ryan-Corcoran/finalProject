@@ -10,11 +10,11 @@ using CorkyID.Models;
 
 namespace CorkyID
 {
-    public class DeleteModel : PageModel
+    public class SchemeDeleteModel : PageModel
     {
-        private readonly CorkyID.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(CorkyID.Data.ApplicationDbContext context)
+        public SchemeDeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }

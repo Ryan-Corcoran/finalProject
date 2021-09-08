@@ -13,11 +13,11 @@ using CorkyID.Models;
 
 namespace CorkyID
 {
-    public class EditModel : PageModel
+    public class SchemeEditModel : PageModel
     {
         private readonly CorkyID.Data.ApplicationDbContext _context;
 
-        public EditModel(CorkyID.Data.ApplicationDbContext context)
+        public SchemeEditModel(CorkyID.Data.ApplicationDbContext context)
         {
             _context = context;
         }

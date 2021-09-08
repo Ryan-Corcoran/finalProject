@@ -24,8 +24,8 @@ namespace CorkyID.Models
         [DisplayName("Valid To")]
         public DateTime ValidToDate { get; set; }
 
-        [DisplayName("Scheme Description")]
-        public String SchemeDescription { get; set; }
+        [DisplayName("Description")]
+        public string SchemeDescription { get; set; }
 
         public Guid OwnerID { get; set;
         }

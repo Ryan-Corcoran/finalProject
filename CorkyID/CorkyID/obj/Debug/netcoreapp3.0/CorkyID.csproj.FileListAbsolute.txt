@@ -367,3 +367,11 @@ D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\ne
 D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\CorkyID.dll
 D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\CorkyID.pdb
 D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
+D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml.g.cs
+D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\Account\Manage\SetPassword.cshtml.g.cs
+D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\Account\Manage\_Layout.cshtml.g.cs
+D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Pages\Discount\DiscountCreate.cshtml.g.cs
+D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Pages\Discount\DiscountDelete.cshtml.g.cs
+D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Pages\Discount\DiscountDetails.cshtml.g.cs
+D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Pages\Discount\DiscountEdit.cshtml.g.cs
+D:\Ryan Corcoran\Documents\VS Projects\finalProject\CorkyID\CorkyID\obj\Debug\netcoreapp3.0\Razor\Pages\Discount\Index.cshtml.g.cs

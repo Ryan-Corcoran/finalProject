@@ -12,11 +12,11 @@ using CorkyID.Models;
 
 namespace CorkyID
 {
-    public class IndexModel : PageModel
+    public class SchemeIndexModel : PageModel
     {
         private readonly CorkyID.Data.ApplicationDbContext _context;
 
-        public IndexModel(CorkyID.Data.ApplicationDbContext context)
+        public SchemeIndexModel(CorkyID.Data.ApplicationDbContext context)
         {
             _context = context;
         }
@@ -43,9 +43,11 @@ namespace CorkyID
 
         public async Task<IActionResult> OnGetAssignUser(string Id)
         {
-            SchemeUsers SU = new SchemeUsers();
-            SU.UserID = Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            SU.SchemeID = Guid.Parse(Id);
+            SchemeUsers SU = new SchemeUsers
+            {
+                UserID = Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier)),
+                SchemeID = Guid.Parse(Id)
+            };
             _context.Add(SU);
             await _context.SaveChangesAsync();
             return RedirectToPage();

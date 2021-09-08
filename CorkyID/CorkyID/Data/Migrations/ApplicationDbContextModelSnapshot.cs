@@ -19,6 +19,44 @@ namespace CorkyID.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CorkyID.Models.Discount", b =>
+                {
+                    b.Property<Guid>("DiscountID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DiscountDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiscountPercentage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LogoURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RedirectURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RetailerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ValidFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ValidTo")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("DiscountID");
+
+                    b.ToTable("Discount");
+                });
+
             modelBuilder.Entity("CorkyID.Models.SchemeUsers", b =>
                 {
                     b.Property<int>("AssignmentID")

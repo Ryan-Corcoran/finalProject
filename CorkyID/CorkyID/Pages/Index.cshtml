@@ -15,29 +15,18 @@
         </div>  
     </div>
 
-    <div class="card-deck">
-        <div class="card">
-            <img class="card-img-top" src="http://www.ll-mm.com/images/placeholders/image-placeholder.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">JD Sports</h5>
-                <p class="card-text">An extra 10% off the summer sale at JD Sports with CorkyID!.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="card-columns">
+        @foreach (var item in Model.Discounts)
+        {
+            <div class="card">
+                <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
+                    <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
+                    <a class="btn btn-primary mb-2" href="@item.RedirectURL">Get Now</a>
+                </div>
             </div>
+        }
+
         </div>
-        <div class="card">
-            <img class="card-img-top" src="http://www.ll-mm.com/images/placeholders/image-placeholder.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Prezzo</h5>
-                <p class="card-text">10% off pizzas when you spend atleast £40 at Prezzos.</p>
-                <p class="card-text"><small class="text-muted">Last updated 95 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card-img-top" src="http://www.ll-mm.com/images/placeholders/image-placeholder.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Incoming soon</h5>
-                <p class="card-text">New Deals incoming soon!</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-    </div>

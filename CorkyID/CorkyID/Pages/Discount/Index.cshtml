@@ -1,0 +1,55 @@
+﻿@page
+@model CorkyID.DiscountIndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>View Discounts</h1>
+
+<p>
+    <a asp-page="DiscountCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount[0].RetailerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount[0].DiscountPercentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount[0].DiscountDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount[0].LastUpdated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Discount) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RetailerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdated)
+            </td>
+            <td>
+                <a asp-page="./DiscountEdit" asp-route-id="@item.DiscountID">Edit</a> |
+                <a asp-page="./DiscountDetails" asp-route-id="@item.DiscountID">Details</a> |
+                <a asp-page="./DiscountDelete" asp-route-id="@item.DiscountID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

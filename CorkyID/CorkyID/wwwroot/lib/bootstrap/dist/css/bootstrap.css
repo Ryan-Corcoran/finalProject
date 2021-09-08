@@ -4306,7 +4306,7 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-md .navbar-nav .nav-link {
-    padding-right: 0.5rem;
+    padding-right: 6.5rem;
     padding-left: 0.5rem;
   }
   .navbar-expand-md > .container,
@@ -4348,7 +4348,7 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: 0.5rem;
+    padding-right: 6.5rem !important; 
     padding-left: 0.5rem;
   }
   .navbar-expand-lg > .container,
@@ -4390,7 +4390,7 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-xl .navbar-nav .nav-link {
-    padding-right: 0.5rem;
+    padding-right: 6.5rem;
     padding-left: 0.5rem;
   }
   .navbar-expand-xl > .container,
@@ -4432,7 +4432,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-expand .navbar-nav .nav-link {
-  padding-right: 0.5rem;
+  padding-right: 6.5rem;
   padding-left: 0.5rem;
 }
 

@@ -7,15 +7,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CorkyID.Data;
 using CorkyID.Models;
-
+using System.Security.Claims;
 
 namespace CorkyID
 {
-    public class DetailsModel : PageModel
+    public class SchemeDetailsModel : PageModel
     {
-        private readonly CorkyID.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DetailsModel(CorkyID.Data.ApplicationDbContext context)
+        public SchemeDetailsModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -41,12 +41,24 @@ namespace CorkyID
             }
             return Page();
         }
-
+        //public async Task<IActionResult> OnGetAddNewUser(string email)
+        //{
+        //    SchemeUsers SU = new SchemeUsers
+        //    {
+        //        UserID = Guid.Parse(this.User.FindFirstValue(email)),
+        //        SchemeID = Guid.Parse("")
+        //    };
+        //    _context.Add(SU);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToPage();
+        //}
 
         public string GetUserEmail (Guid Id)
         {
             var user = _context.Users.FirstOrDefaultAsync(x => x.Id == Id.ToString()).Result;
             return user.Email;
         }
+
+        
     }
 }

@@ -12,11 +12,11 @@ using CorkyID.Models;
 
 namespace CorkyID
 {
-    public class CreateModel : PageModel
+    public class SchemeCreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public CreateModel(ApplicationDbContext context)
+        public SchemeCreateModel(ApplicationDbContext context)
         {
             _context = context;
         }

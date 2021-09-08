@@ -16,5 +16,6 @@ namespace CorkyID.Data
         public DbSet<Schemes> Schemes { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<SchemeUsers> SchemeUsers { get; set; }
+        public DbSet<Discount> Discount { get; set; }
     }
 }
