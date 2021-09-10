@@ -65,6 +65,17 @@
             </div>
             <span asp-validation-for="Discount.Category" class="text-danger"></span>
             <div class="form-group">
+                <label asp-for="Discount.DiscountViewRestrictions" class="control-label"></label>
+                <select asp-for="Discount.DiscountViewRestrictions" id="inputState" class="form-control">
+                    <option selected>All Schemes</option>
+                    @foreach (var item in Model.Schemes)
+                    {
+                        <option>@Html.DisplayFor(modelItem => item.Name)</option>
+                    }
+                </select>
+            </div>
+            <span asp-validation-for="Discount.DiscountViewRestrictions" class="text-danger"></span>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-outline-info" />
                 <a class="btn btn-outline-warning" style="margin-left:10px" asp-page="./Index">Cancel</a>
             </div>

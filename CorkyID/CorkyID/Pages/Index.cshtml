@@ -1,31 +1,33 @@
 ﻿@page
 @model IndexModel
+@inject SignInManager<IdentityUser> SignInManager
+@using System.Security.Claims
 @{
     ViewData["Title"] = "Home page";
 }
 
 @*<div class="container">
-    <ul class="nav justify-content-center nav-fill">
-        <li class="nav-item active">
-            <a class="nav-link" href="#featured">Featured</a>
-        </li>
-        <li class="nav-item bl">
-            <a class="nav-link" href="#fashion">Fashion</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#food">Food/Drink</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#technology">Technology</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#travel">Travel</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#entertainment">Entertainment</a>
-        </li>
-    </ul>
-</div>*@
+        <ul class="nav justify-content-center nav-fill">
+            <li class="nav-item active">
+                <a class="nav-link" href="#featured">Featured</a>
+            </li>
+            <li class="nav-item bl">
+                <a class="nav-link" href="#fashion">Fashion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#food">Food/Drink</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#technology">Technology</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#travel">Travel</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#entertainment">Entertainment</a>
+            </li>
+        </ul>
+    </div>*@
 
 <section id="featured">
     <hr />
@@ -41,7 +43,7 @@
                 <img class="d-block w-100" style="height:450px" src="~/img/nandosOffer.png" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Student exclusive offers at Nandos</h5>
-                    <p>Show your corkyID in Nandos for fantastic discounts off food & drink.</p>
+                    <p>Check out the fantastic Nandos deal below for huge discounts off food & drink.</p>
                 </div>
             </div>
             <div class="carousel-item">
@@ -76,15 +78,21 @@
         {
             @if (item.Category == "Fashion")
             {
-                <div class="card" style="width: 320px; height: 375px">
-                    <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
-                        <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
-                        <a class="btn btn-primary mb-2" href="@item.RedirectURL">Get Now</a>
+                @if (Model.DisplayDiscount(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.DiscountID))
+                {
+                    <div class="card" style="width: 320px; height: auto">
+                        <img class="card-img-top" src="@item.LogoURL" style="width:318px;height:150px;" alt="Logo of business">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
+                            <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
+                            <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <a class="btn btn-primary mb-2" asp-page="./Discount/DiscountDetails" asp-route-id="@item.DiscountID">Get Now</a>
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             }
         }
     </div>
@@ -99,15 +107,21 @@
 
             @if (item.Category == "Food/Drink")
             {
-                <div class="card" style="width: 320px; height: 375px">
-                    <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
-                        <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
-                        <a class="btn btn-primary mb-2" href="@item.RedirectURL">Get Now</a>
+                @if (Model.DisplayDiscount(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.DiscountID))
+                {
+                    <div class="card" style="width: 320px; height: auto">
+                        <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
+                            <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
+                            <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <a class="btn btn-primary mb-2" asp-page="./Discount/DiscountDetails" asp-route-id="@item.DiscountID">Get Now</a>
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             }
         }
     </div>
@@ -121,15 +135,21 @@
         {
             @if (item.Category == "Technology")
             {
-                <div class="card" style="width: 320px; height: 375px">
-                    <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
-                        <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
-                        <a class="btn btn-primary mb-2" href="@item.RedirectURL">Get Now</a>
+                @if (Model.DisplayDiscount(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.DiscountID))
+                {
+                    <div class="card" style="width: 320px; height: 375px">
+                        <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
+                            <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
+                            <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <a class="btn btn-primary mb-2" asp-page="./Discount/DiscountDetails" asp-route-id="@item.DiscountID">Get Now</a>
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             }
         }
     </div>
@@ -143,15 +163,21 @@
         {
             @if (item.Category == "Travel")
             {
-                <div class="card" style="width: 320px; height: 350px">
-                    <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
-                        <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
-                        <a class="btn btn-primary mb-2" href="@item.RedirectURL">Get Now</a>
+                @if (Model.DisplayDiscount(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.DiscountID))
+                {
+                    <div class="card" style="width: 320px; height: 350px">
+                        <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
+                            <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
+                            <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <a class="btn btn-primary mb-2" asp-page="./Discount/DiscountDetails" asp-route-id="@item.DiscountID">Get Now</a>
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             }
         }
     </div>
@@ -165,15 +191,21 @@
         {
             @if (item.Category == "Entertainment")
             {
-                <div class="card" style="width: 320px; height: 375px">
-                    <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
-                        <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
-                        <a class="btn btn-primary mb-2" href="@item.RedirectURL">Get Now</a>
+                @if (Model.DisplayDiscount(this.User.FindFirstValue(ClaimTypes.NameIdentifier), item.DiscountID))
+                {
+                    <div class="card" style="width: 320px; height: 375px">
+                        <img class="card-img-top" src="@item.LogoURL" style="width:inherit;height:150px;" alt="Logo of business">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelitem => item.RetailerName)</h5>
+                            <p class="card-text">@Html.DisplayFor(modelitem => item.DiscountDescription)</p>
+                            <p class="card-text"><small class="text-muted">Last updated: @Html.DisplayFor(modelitem => item.LastUpdated)</small></p>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <a class="btn btn-primary mb-2" asp-page="./Discount/DiscountDetails" asp-route-id="@item.DiscountID">Get Now</a>
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             }
         }
     </div>

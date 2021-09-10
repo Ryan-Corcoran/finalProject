@@ -36,5 +36,18 @@ namespace CorkyID
             }
             return Page();
         }
+
+        public async Task<Boolean> IsUserOwner(string userID, Guid discountID)
+        {
+            var discountOwnerList = await _context.Discount.Where(x => x.UserID == Guid.Parse(userID) && x.DiscountID == discountID).ToListAsync();
+            if (discountOwnerList.Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

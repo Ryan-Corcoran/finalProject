@@ -54,10 +54,7 @@
                     @Html.DisplayFor(modelItem => item.Category)
                 </td>
                 <td scope="row">
-                    @if (item.UserID == Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier)))
-                    {
-                        <a class="btn btn-outline-info" asp-page="./DiscountDetails" asp-route-id="@item.DiscountID">Manage</a>
-                    }
+                    <a class="btn btn-outline-info" asp-page="./DiscountDetails" asp-route-id="@item.DiscountID">View</a>
                 </td>
             </tr>
         }

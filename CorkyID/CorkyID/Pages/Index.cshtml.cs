@@ -16,6 +16,10 @@ namespace CorkyID.Pages
         private readonly ApplicationDbContext _context;
         public IList<Models.Discount> Discounts { get; set; }
 
+        public IList<Models.Schemes> Schemes { get; set; }
+
+        public IList<Models.SchemeUsers> SchemeUsers { get; set; }
+
         public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context)
         {
             _logger = logger;
@@ -25,6 +29,28 @@ namespace CorkyID.Pages
         public async Task OnGet()
         {
             Discounts = await _context.Discount.Where(x => x.ValidTo >= DateTime.UtcNow).ToListAsync();
+        }
+
+        public Boolean DisplayDiscount(string userID, Guid discountID)
+        {
+            var discount = _context.GetDiscount(discountID);
+            var schemeRestriction = discount.DiscountViewRestrictions;
+            if (schemeRestriction == "All Schemes")
+            {
+                return true;
+            }
+            else
+            {
+            if (userID != null)
+            {
+                var schemes = _context.Schemes.First(x => x.Name == schemeRestriction).SchemeID.ToString();
+                var found = _context.SchemeUsers.Any(x => x.UserID == Guid.Parse(userID) && x.SchemeID == Guid.Parse(schemes));
+                return found;
+            } else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

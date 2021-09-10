@@ -59,6 +59,18 @@ namespace CorkyID
             return user.Email;
         }
 
+        public async Task<IActionResult> OnGetRemoveUser(Guid Id)
+        {
+            var schemeUser = _context.SchemeUsers.FirstOrDefaultAsync(x => x.UserID == Id).Result;
+            if (schemeUser.SchemeID != Guid.Empty && schemeUser.SchemeID != null)
+            {
+                _context.Remove(schemeUser);
+                await _context.SaveChangesAsync();
+                return Redirect("/Scheme/SchemeDetails?id=" + schemeUser.SchemeID);
+            }
+            return Redirect("/Scheme/Index"); 
+        }
+
         
     }
 }

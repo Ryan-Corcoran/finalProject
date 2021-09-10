@@ -24,6 +24,8 @@ namespace CorkyID
         [BindProperty]
         public Discount Discount { get; set; }
 
+        public IList<Schemes> Schemes { get; set; }
+
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
@@ -32,6 +34,7 @@ namespace CorkyID
             }
 
             Discount = _context.GetDiscount(id);
+            Schemes = _context.GetSchemesAsync().Result;
 
             if (Discount == null)
             {

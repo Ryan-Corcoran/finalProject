@@ -46,6 +46,12 @@ namespace CorkyID
             _context.Schemes.Add(Schemes);
             await _context.SaveChangesAsync();
 
+            SchemeUsers su = new SchemeUsers();
+            su.UserID = Schemes.OwnerID;
+            su.SchemeID = Schemes.SchemeID;
+            _context.SchemeUsers.Add(su);
+            await _context.SaveChangesAsync();
+
             return RedirectToPage("./Index");
         }
     }

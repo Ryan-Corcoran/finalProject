@@ -23,11 +23,14 @@ namespace CorkyID
 
         public IActionResult OnGet()
         {
+            Schemes = _context.GetSchemesAsync().Result;
             return Page();
         }
 
         [BindProperty]
         public Discount Discount { get; set; }
+
+        public IList<Schemes> Schemes { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {

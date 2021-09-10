@@ -52,5 +52,8 @@ namespace CorkyID.Models
         [DisplayName("Category")]
         [Required]
         public string Category { get; set; }
+
+        [DisplayName("View Restrictions")]
+        public string DiscountViewRestrictions { get; set; }
     }
 }

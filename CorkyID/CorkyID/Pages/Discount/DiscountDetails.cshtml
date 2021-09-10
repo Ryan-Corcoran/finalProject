@@ -1,70 +1,45 @@
 ﻿@page
 @model CorkyID.DiscountDetailsModel
+@using System.Security.Claims;
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
-<h4>Discount Details</h4>
-<hr />
-<div>
+<div class="container">
+    <h4 class="text-center">@Html.DisplayFor(model => model.Discount.RetailerName)</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount.RetailerName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount.RetailerName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount.DiscountPercentage)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount.DiscountPercentage)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount.DiscountDescription)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount.DiscountDescription)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount.ValidFrom)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount.ValidFrom)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount.ValidTo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount.ValidTo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount.LogoURL)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount.LogoURL)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount.RedirectURL)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount.RedirectURL)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount.LastUpdated)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Discount.LastUpdated)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a class="btn btn-outline-info" role="button"  asp-page="./DiscountEdit" asp-route-id="@Model.Discount.DiscountID">Edit Discount</a>
-    <a class="btn btn-outline-danger" style="margin-left:10px" role="button" asp-page="./DiscountDelete" asp-route-id="@Model.Discount.DiscountID">Delete Discount</a> 
+
+    <div class="text-center">
+        <img class="rounded" style="height:320px; width:620px" src="@Model.Discount.LogoURL" />
     </div>
+
+    <br />
+    <div>
+        <div class="text-center text-">
+            <strong>@Html.DisplayFor(model => model.Discount.DiscountDescription)</strong>
+        </div>
+        <br />
+        <div class="text-center">
+            Click the button below to activate this discount.
+        </div>
+        <br />
+        <div class="text-center">
+            <a class="btn btn btn-outline-success" role="button" href="@Model.Discount.RedirectURL">Get Discount Now</a>
+        </div>
+    </div>
+
+    @if (await Model.IsUserOwner(this.User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Discount.DiscountID))
+    {
+        <br />
+        <div class="text-center">
+            <h4>Discount Management</h4>
+            <hr />
+            <a class="btn btn-outline-info" role="button"  asp-page="./DiscountEdit" asp-route-id="@Model.Discount.DiscountID">Edit Discount</a>
+            <a class="btn btn-outline-danger" style="margin-left:10px" role="button" asp-page="./DiscountDelete" asp-route-id="@Model.Discount.DiscountID">Delete Discount</a> 
+        </div>
+    }
+</div>
 <hr />
 <div>
     <a class="btn btn-outline-warning" role="button" asp-page="./Index" style="margin-top:10px">Go Back</a>
