@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
+    <header class="fixed-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow">
             <div class="container">
                 <nav class="navbar navbar-light bg-white">
@@ -21,38 +21,36 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
-                    <!--<ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="btn btn-outline-info btn-lg" asp-area="" asp-page="/Scheme/Index" style="margin-left: 20px">Schemes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-info btn-lg" asp-area="" asp-page="/Discount/Index" style="margin-left: 20px">Manage Discounts</a>
-                        </li>
-                    </ul>
-                        -->
                 </div>
             </div>
         </nav>
-        <!--
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-        <div class="container">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">All</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Fashion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Food/Drink</a>
-                    </li>
-                </ul>
-            </div>
+        @if (ViewData["Title"] == "Home page")
+        {
+        <div class="container bg-white">
+            <ul class="nav justify-content-center nav-fill">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#featured">Featured</a>
+                </li>
+                <li class="nav-item bl">
+                    <a class="nav-link" href="#fashion">Fashion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#food">Food/Drink</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#technology">Technology</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#travel">Travel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#entertainment">Entertainment</a>
+                </li>
+            </ul>
         </div>
-    </nav>-->
+        }
     </header>
-    <div class="container">
+    <div class="container" style="margin-top: 125px">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

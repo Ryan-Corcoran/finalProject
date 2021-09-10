@@ -25,6 +25,9 @@ namespace CorkyID.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DiscountDescription")
                         .HasColumnType("nvarchar(max)");
 

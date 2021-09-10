@@ -6,9 +6,9 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 <br />
-<h4>Create a new scheme</h4>
+<h4 class="text-center">Create a new scheme</h4>
 <hr />
-<div class="row">
+<div class="row justify-content-center align-items-center">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -33,14 +33,11 @@
                 <span asp-validation-for="Schemes.SchemeDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-success" />
+                <input type="submit" value="Create" class="btn btn-outline-info" />
+                <a class="btn btn-outline-warning" style="margin-left:10px" role="button" asp-page="Index">Cancel</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a class="btn btn-outline-danger" role="button" asp-page="Index">Cancel</a>
 </div>
 
 @section Scripts {

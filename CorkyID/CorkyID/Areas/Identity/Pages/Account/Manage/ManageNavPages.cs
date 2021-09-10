@@ -14,6 +14,7 @@ namespace CorkyID.Areas.Identity.Pages.Account.Manage
 
         public static string ChangePassword => "ChangePassword";
 
+
         public static string PersonalData => "PersonalData";
 
 
@@ -24,7 +25,6 @@ namespace CorkyID.Areas.Identity.Pages.Account.Manage
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 
         public static string PersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, PersonalData);
-
 
         private static string PageNavClass(ViewContext viewContext, string page)
         {

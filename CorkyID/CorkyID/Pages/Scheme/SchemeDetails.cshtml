@@ -37,9 +37,9 @@
             @Html.DisplayFor(model => model.Schemes.SchemeDescription)
         </dd>
     </dl>
-    <div class="btn-group-vertical">
-        <a class="btn btn-outline-info" role="button" asp-page="./SchemeEdit" asp-route-id="@Model.Schemes.SchemeID" style="margin-bottom: 5px">Edit Scheme Details</a>
-        <a class="btn btn-danger" role="button" asp-page="./SchemeDelete" asp-route-id="@Model.Schemes.SchemeID"> Delete Scheme</a>
+    <div class="btn-group">
+        <a class="btn btn-outline-info" role="button" asp-page="./SchemeEdit"  asp-route-id="@Model.Schemes.SchemeID">Edit Scheme</a>
+        <a class="btn btn-outline-danger" role="button" asp-page="./SchemeDelete" style="margin-left: 10px" asp-route-id="@Model.Schemes.SchemeID"> Delete Scheme</a>
     </div>
 
     <hr />
@@ -73,17 +73,7 @@
         </table>
     </div>
     <hr />
-
-    <div class="container">
-        <label for="tx_EmailEntry">Enter Email Address of new user</label>
-        <div class="form-group mb-2">
-            <input class="col-sm-2 col-form-label" id="tx_EmailEntry" name="emailEntry" type="text" placeholder="Enter Email Address" />
-            <a class="btn btn-outline-info" role="button" asp-page-handler="AddNewUser" asp-route-email="emailEntry">Add</a>
-        </div>
-
-    </div>
-    <hr />
 </div>
 <div>
-    <a asp-page="./Index">Go Back</a>
+    <a class="btn btn-outline-warning" asp-page="./Index">Go Back</a>
 </div>

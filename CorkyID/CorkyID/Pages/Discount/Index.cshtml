@@ -1,55 +1,65 @@
 ﻿@page
 @model CorkyID.DiscountIndexModel
+@using System.Security.Claims
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>View Discounts</h1>
-
+<h4>View Discounts</h4>
+<hr />
 <p>
-    <a asp-page="DiscountCreate">Create New</a>
+    <a class="btn btn-outline-info btn-sm" asp-page="DiscountCreate">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped">
+    <caption>List of all active discounts</caption>
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Discount[0].RetailerName)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Discount[0].DiscountPercentage)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Discount[0].DiscountDescription)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Discount[0].LastUpdated)
             </th>
-            <th></th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Discount[0].Category)
+            </th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Discount) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RetailerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiscountPercentage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiscountDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdated)
-            </td>
-            <td>
-                <a asp-page="./DiscountEdit" asp-route-id="@item.DiscountID">Edit</a> |
-                <a asp-page="./DiscountDetails" asp-route-id="@item.DiscountID">Details</a> |
-                <a asp-page="./DiscountDelete" asp-route-id="@item.DiscountID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Discount)
+        {
+            <tr>
+                <th scope="row">
+                    @Html.DisplayFor(modelItem => item.RetailerName)
+                </th>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.DiscountPercentage)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.DiscountDescription)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.LastUpdated)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td scope="row">
+                    @if (item.UserID == Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                    {
+                        <a class="btn btn-outline-info" asp-page="./DiscountDetails" asp-route-id="@item.DiscountID">Manage</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

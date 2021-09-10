@@ -8,14 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CorkyID.Data;
 using CorkyID.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace CorkyID
 {
     public class DiscountCreateModel : PageModel
     {
-        private readonly CorkyID.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DiscountCreateModel(CorkyID.Data.ApplicationDbContext context)
+        public DiscountCreateModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -35,10 +36,17 @@ namespace CorkyID
                 return Page();
             }
 
-            Discount.UserID = Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            Discount.LastUpdated = DateTime.UtcNow;
-            _context.Discount.Add(Discount);
-            await _context.SaveChangesAsync();
+            try
+            {
+                Discount.UserID = Guid.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+                Discount.LastUpdated = DateTime.UtcNow;
+                await _context.AddDiscountAsync(Discount);
+            }
+            catch (Exception)
+            {
+               ModelState.AddModelError("Error", "An error occured adding the new discount");
+               return RedirectToPage("./Index");
+            }
 
             return RedirectToPage("./Index");
         }

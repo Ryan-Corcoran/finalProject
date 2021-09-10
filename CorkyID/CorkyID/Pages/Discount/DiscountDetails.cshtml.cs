@@ -28,7 +28,7 @@ namespace CorkyID
                 return NotFound();
             }
 
-            Discount = await _context.Discount.FirstOrDefaultAsync(m => m.DiscountID == id);
+            Discount = _context.GetDiscount(id);
 
             if (Discount == null)
             {

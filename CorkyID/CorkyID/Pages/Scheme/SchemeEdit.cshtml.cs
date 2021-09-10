@@ -17,7 +17,7 @@ namespace CorkyID
     {
         private readonly CorkyID.Data.ApplicationDbContext _context;
 
-        public SchemeEditModel(CorkyID.Data.ApplicationDbContext context)
+        public SchemeEditModel(ApplicationDbContext context)
         {
             _context = context;
         }

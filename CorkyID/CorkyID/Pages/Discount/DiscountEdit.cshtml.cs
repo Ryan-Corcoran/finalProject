@@ -8,14 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CorkyID.Data;
 using CorkyID.Models;
+using System.Security.Claims;
 
 namespace CorkyID
 {
     public class DiscountEditModel : PageModel
     {
-        private readonly CorkyID.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DiscountEditModel(CorkyID.Data.ApplicationDbContext context)
+        public DiscountEditModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -30,7 +31,7 @@ namespace CorkyID
                 return NotFound();
             }
 
-            Discount = await _context.Discount.FirstOrDefaultAsync(m => m.DiscountID == id);
+            Discount = _context.GetDiscount(id);
 
             if (Discount == null)
             {
@@ -39,8 +40,6 @@ namespace CorkyID
             return Page();
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,13 +47,15 @@ namespace CorkyID
                 return Page();
             }
 
+            Discount.UserID = Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            Discount.LastUpdated = DateTime.UtcNow;
             _context.Attach(Discount).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(true);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
                 if (!DiscountExists(Discount.DiscountID))
                 {
@@ -68,6 +69,7 @@ namespace CorkyID
 
             return RedirectToPage("./Index");
         }
+
 
         private bool DiscountExists(Guid id)
         {
