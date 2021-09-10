@@ -26,7 +26,7 @@ namespace CorkyID
             if (User.Identity.IsAuthenticated)
             {
                 return Page();
-            } 
+            }
             else
             {
                 return Redirect("./index");
@@ -35,24 +35,31 @@ namespace CorkyID
 
         [BindProperty]
         public Schemes Schemes { get; set; }
-        
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return Page();
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+                Schemes.OwnerID = Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+                _context.Schemes.Add(Schemes);
+                await _context.SaveChangesAsync();
+
+                SchemeUsers su = new SchemeUsers();
+                su.UserID = Schemes.OwnerID;
+                su.SchemeID = Schemes.SchemeID;
+                _context.SchemeUsers.Add(su);
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("./Index");
             }
-            Schemes.OwnerID = Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            _context.Schemes.Add(Schemes);
-            await _context.SaveChangesAsync();
-
-            SchemeUsers su = new SchemeUsers();
-            su.UserID = Schemes.OwnerID;
-            su.SchemeID = Schemes.SchemeID;
-            _context.SchemeUsers.Add(su);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            catch (Exception)
+            {
+                return RedirectToPage("./Index");
+            }
         }
     }
 }
